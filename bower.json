@@ -1,0 +1,46 @@
+{
+  "name": "angular-draggable-toggle",
+  "version": "0.0.1",
+  "description": "A lightweight Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - where the handle / knob is clickable AND draggable.", 
+  "authors": [
+    { 
+	  "name": "Stephan Schmitz", 
+	  "email": "eyecatchup@gmail.com", 
+	  "homepage": "http://eyecatchup.github.io" 
+	},
+    { 
+	  "name": "Simon Tabor", 
+	  "email": "me@simontabor.com", 
+	  "homepage": "http://simontabor.com" 
+	},
+    { 
+	  "name": "Chris Garvis", 
+	  "homepage": "http://chrisgarvis.com" 
+	}
+  ],  
+  "main": "dist/angular-draggable-toggle.js",
+  "license": "MIT",
+  "homepage": "http://eyecatchup.github.io/angular-draggable-toggle/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eyecatchup/angular-draggable-toggle.git"
+  },
+  "ignore": [
+    "**/.*",
+    "*.md",
+    "contrib/*",
+    "bower_components",
+    "node_modules",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json",
+    ".travis.yml"
+  ],
+  "dependencies": {
+    "jquery": "~1.9.0"
+  },
+  "devDependencies": {
+    "angular": "~1.2.27",
+    "angular-mocks": "~1.2.27"
+  }
+}

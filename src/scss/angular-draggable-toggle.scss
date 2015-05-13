@@ -1,0 +1,17 @@
+/* base styles */
+.toggle-slide {
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  direction: ltr;
+
+  .toggle-on, .toggle-off, .toggle-handle {
+    float: left;
+  }
+
+  .toggle-handle {
+    position: relative;
+    z-index: 99;
+    cursor: e-resize;
+  }
+}

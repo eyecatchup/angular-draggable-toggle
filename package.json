@@ -1,0 +1,71 @@
+{
+  "name": "angular-draggable-toggle",
+  "version": "0.0.1",
+  "title": "AngularJS Draggable Toggle Button.",
+  "author": {
+    "name": "Stephan Schmitz",
+    "url": "http://eyecatchup.github.io"
+  },
+  "homepage": "http://eyecatchup.github.io/angular-draggable-toggle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eyecatchup/angular-draggable-toggle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eyecatchup/angular-draggable-toggle/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://eyecatchup.mit-license.org"
+    }
+  ],
+  "keywords": [
+    "angular",
+    "angularjs",
+    "angular.js",
+    "toggle",
+    "switch",
+    "drag",
+    "draggable",
+    "toggle slider",
+    "toggle switch",
+    "angular toggle",
+    "angular switch"
+  ],  
+  "main": "gulpfile.js",
+  "scripts": {
+    "postinstall": "bower install && gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "~1.2.27",
+    "angular-mocks": "~1.2.27",
+    "bower": "^1.3.12",
+    "gulp": "^3.8.11",
+    "gulp-angular-templatecache": "^1.5.0",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-header": "^1.2.2",
+    "gulp-jshint": "^1.10.0",
+    "gulp-karma": "0.0.4",
+    "gulp-ng-annotate": "^0.5.2",
+    "gulp-rename": "^1.2.0",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-sass": "^1.3.3",
+    "gulp-uglify": "^1.1.0",
+    "jasmine-core": "^2.2.0",
+    "jasmine-expect": "^1.22.3",
+    "karma": "^0.12.31",
+    "karma-jasmine": "^0.3.5",
+    "karma-junit-reporter": "~0.2",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "run-sequence": "^1.0.2"
+  },
+  "contributors": [
+    "Simon Tabor (http://simontabor.com/)",
+    "Chris Garvis (http://chrisgarvis.com)"
+  ]
+}
