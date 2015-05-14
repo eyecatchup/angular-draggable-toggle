@@ -1,4 +1,4 @@
-# angular-draggable-toggle
+# [WIP] angular-draggable-toggle
 
 A lightweight Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - where the handle / knob is clickable AND draggable.
 
