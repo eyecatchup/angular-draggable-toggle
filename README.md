@@ -3,7 +3,7 @@
 A lightweight Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - where the handle / knob is clickable, draggable and configurable in many ways.
 
 ## Demos
-[eyecatchup.github.io/angular-draggable-toggle/demo.html](http://eyecatchup.github.io/angular-draggable-toggle/demo.html)
+[eyecatchup.github.io/angular-draggable-toggle/demo.html](http://eyecatchup.github.io/angular-draggable-toggle/demo.html)  
 [eyecatchup.github.io/angular-draggable-toggle/demo-touch.html](http://eyecatchup.github.io/angular-draggable-toggle/demo-touch.html)
 
 ## Installation
