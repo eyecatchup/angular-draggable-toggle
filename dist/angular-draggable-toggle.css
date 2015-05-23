@@ -17,16 +17,17 @@
 /* themed styles */
 .toggle-clean .toggle-slide {
   border-radius: 0;
-  border: 1px solid #888; }
+  border: 1px solid #666; }
 .toggle-clean .toggle-on, .toggle-clean .toggle-off, .toggle-clean .toggle-handle {
-  color: #fff;
   font-size: 14px;
   font-family: Arial,'Sans serif';
   font-weight: bold; }
 .toggle-clean .toggle-on, .toggle-clean .toggle-select .toggle-inner .active {
-  background: #1D981D; }
+  background: #1D981D;
+  color: #fff; }
 .toggle-clean .toggle-off, .toggle-clean .toggle-select .toggle-on {
-  background: #BE2424; }
+  background: #BE2424;
+  color: #fff; }
 .toggle-clean .toggle-handle {
   border-radius: 0;
   background-color: #f5f5f5; }
