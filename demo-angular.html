@@ -1,0 +1,152 @@
+<!--
+Copyright (c) 2015 Stephan Schmitz, <https://eyecatchup.github.io/>, <eyecatchup@gmail.com>. All rights reserved.
+This code may only be used under the MIT license found at <http://eyecatchup.mit-license.org/>.
+--><!doctype html>
+<html ng-app="toggleDemoApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>AngularJS Draggable Toggle Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- jQuery plugin styles -->
+    <link rel="stylesheet" href="dist/angular-draggable-toggle.css">
+    <!-- Demo-only styles -->
+    <style>
+      body {font-family: Arial, 'Sans serif';}
+      h3 {font-size: 16px;}
+      h5 {font-size: 12px; margin: 10px 0;}
+      p {margin: 10px 0 15px;}
+      pre {background: #f2f2f2; color: darkblue; padding: 5px; margin-bottom: 15px;}
+      .small {max-width: 200px;}
+      hr {margin: 20px 0;}
+    </style>
+  </head>
+  <body>
+
+    <div ng-controller="ToggleDemoController">
+
+      <h3 name="example-1">Draggable handle &amp; clickable labels, fixed width (set via CSS)</h3>
+
+      <h5>Source:</h5>
+      <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.1 }}&lt;/p&gt;
+&lt;div ng-model="toggleState.1" class="toggle" draggable-toggle="{handleWidth: 120, height: 30}"&gt;&lt;/div&gt;</code></pre>
+
+      <h5>Result:</h5>
+      <p>Toggle-State: {{ toggleState.1 }}</p>
+      <div class="small">
+        <div ng-model="toggleState.1" class="toggle toggle-clean"
+             draggable-toggle="{handleWidth: 120, height: 30, touch: true}">
+        </div>
+      </div>
+
+      <hr/>
+
+      <h3 name="example-2">Draggable handle &amp; clickable labels + clickable element, custom label texts &amp; animation speed, fixed width (set via CSS)</h3>
+
+      <h5>Source:</h5>
+      <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.2 }}&lt;/p&gt;
+&lt;div class="clicker"&gt;
+  &lt;small&gt;Click this text to toggle!&lt;/small&gt;
+  &lt;div ng-model="toggleState.2" class="toggle" rel="clicker" draggable-toggle="{text: {on: 'AN', off: 'AUS'}, animation: 400, handleWidth: 120, height: 30}"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h5>Result:</h5>
+      <p>Toggle-State: {{ toggleState.2 }}</p>
+      <div class="small clicker">
+        <p><small>Click this text to toggle!</small></p>
+        <div ng-model="toggleState.2" rel="clicker" class="toggle toggle-clean"
+             draggable-toggle="{text: {on: 'AN', off: 'AUS'}, animation: 400, handleWidth: 120, height: 30}">
+        </div>
+      </div>
+
+      <hr/>
+
+      <h3 name="example-3">Draggable handle, labels not clickable, init state: On, extra-wide handle, fluid width</h3>
+
+      <h5>Source:</h5>
+      <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.3 }}&lt;/p&gt;
+&lt;div ng-model="toggleState.3" class="toggle" draggable-toggle="{click: false, on: true, handleWidth: 250, height: 30, animation: 400}"&gt;&lt;/div&gt;</code></pre>
+
+      <h5>Result:</h5>
+      <p>Toggle-State: {{ toggleState.3 }}</p>
+      <div ng-model="toggleState.3" class="toggle toggle-clean"
+           draggable-toggle="{click: false, on: true, handleWidth: 250, height: 30, animation: 400}">
+      </div>
+
+      <hr/>
+
+      <h3 name="example-4">Clickable labels, handle not draggable, no on/off text-labels, extra height, fluid width</h3>
+
+      <h5>Source:</h5>
+      <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.4 }}&lt;/p&gt;
+&lt;div ng-model="toggleState.4" class="toggle" draggable-toggle="{drag: false, text: {on: ' ', off: ' '}, handleWidth: 120, height: 50, animation: 400}"&gt;&lt;/div&gt;</code></pre>
+
+      <h5>Result:</h5>
+      <p>Toggle-State: {{ toggleState.4 }}</p>
+      <div ng-model="toggleState.4" class="toggle toggle-clean"
+           draggable-toggle="{drag: false, text: {on: ' ', off: ' '}, handleWidth: 120, height: 50, animation: 400}">
+      </div>
+
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- jQuery plugin script -->
+    <script src="dist/angular-draggable-toggle.min.js"></script>
+
+    <!-- jQuery plugin wrapper for Angular /w data-binding -->
+    <script>
+      var App = angular.module('toggleDemoApp', []);
+
+      /**
+       * Plugin-Wrapper Angular directive
+       */
+      App.directive('draggableToggle', function($parse) {
+        return {
+          restrict: 'A',
+          link: function($scope, $element, $attrs) {
+            // jQuery plugin invocation
+            var opts = $scope.$eval($attrs.draggableToggle);
+
+            if (angular.isDefined($attrs.rel)) {
+              opts.clicker = $('.' + $attrs.rel);
+            }
+
+            $($element).toggles(opts);
+
+            // Custom event handler to handle $scope updates.
+            $($element).bind('toggle', function() {
+              $scope.$apply(function() {
+                $scope.toggle($attrs.ngModel.split('.')[1]);
+              });
+            });
+          }
+        };
+      });
+
+      /**
+       * Angular Demo-Controller
+       */
+      function ToggleDemoController($scope) {
+        $scope.toggleState = {
+          1: 'Off',
+          2: 'Off',
+          3: 'On',
+          4: 'Off'
+        };
+
+        $scope.$watch('toggleState.1', function (val, oldVal) {
+          if (val !== oldVal) {
+            console.dir('Toggle 1 was changed from ' + oldVal + ' to ' + val + '.');
+          }
+        });
+
+        $scope.toggle = function(i) {
+          console.log('Called $scope.toggle for elem ' + i);
+          $scope.toggleState[i] = $scope.toggleState[i] === 'Off' ? 'On' : 'Off';
+        }
+      }
+    </script>
+  </body>
+</html>
