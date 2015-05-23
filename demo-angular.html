@@ -36,7 +36,7 @@ This code may only be used under the MIT license found at <http://eyecatchup.mit
       <p>Toggle-State: {{ toggleState.1 }}</p>
       <div class="small">
         <div ng-model="toggleState.1" class="toggle toggle-clean"
-             draggable-toggle="{handleWidth: 120, height: 30, touch: true}">
+             draggable-toggle="{handleWidth: 120, height: 30}">
         </div>
       </div>
 
@@ -62,18 +62,18 @@ This code may only be used under the MIT license found at <http://eyecatchup.mit
 
       <hr/>
 
-      <h3 name="example-3">Draggable handle, labels not clickable, init state: On, extra-wide handle, fluid width</h3>
+      <h3 name="example-3">Draggable handle with touch support*, labels not clickable, init state: On, wider handle, fluid width</h3>
 
       <h5>Source:</h5>
       <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.3 }}&lt;/p&gt;
-&lt;div ng-model="toggleState.3" class="toggle" draggable-toggle="{click: false, on: true, handleWidth: 250, height: 30, animation: 400}"&gt;&lt;/div&gt;</code></pre>
+&lt;div ng-model="toggleState.3" class="toggle" draggable-toggle="{click: false, touch: true, on: true, handleWidth: 250, height: 30, animation: 400}"&gt;&lt;/div&gt;</code></pre>
 
       <h5>Result:</h5>
       <p>Toggle-State: {{ toggleState.3 }}</p>
       <div ng-model="toggleState.3" class="toggle toggle-clean"
-           draggable-toggle="{click: false, on: true, handleWidth: 250, height: 30, animation: 400}">
+           draggable-toggle="{click: false, touch: true, on: true, handleWidth: 250, height: 30, animation: 400}">
       </div>
-
+      <p><small><em>* Currently, support for dragging on touch-enabled devices works smoothly only if clickable labels are disabled. :( I'm working on it..</em></small></p>
       <hr/>
 
       <h3 name="example-4">Clickable labels, handle not draggable, no on/off text-labels, extra height, fluid width</h3>
