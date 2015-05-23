@@ -16,6 +16,10 @@ $ git clone https://github.com/eyecatchup/angular-draggable-toggle.git
 $ npm install
 ```
 
+## Credits
+
+This project is based on [Simon Tabor's jQuery Toggles](https://github.com/simontabor/jquery-toggles). I just fixed some minor bugs, added some proper build tool and created the Angular wrapper. All probs should go to Simon! 
+
 ## License
 
 (c) 2015 - present, Stephan Schmitz <eyecatchup@gmail.com>  
