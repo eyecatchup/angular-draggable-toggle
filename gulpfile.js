@@ -1,11 +1,15 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 
+var version = '0.0.2';
+
 var copyright = [
     '/*!**********************************************************************',
     ' *  (c) 2015 Stephan Schmitz <eyecatchup@gmail.com>',
-    ' *  Published under the MIT license (http://eyecatchup.mit-license.org).',
-    ' *',
+    ' *  AngularJS Draggable Toggle Buttons',
+    ' *  @version: ' + version,
+    ' *  @url: <https://github.com/eyecatchup/angular-draggable-toggle/>',
+    ' *  @license: MIT license <http://eyecatchup.mit-license.org>',
     ' *  This copyright notice MUST APPEAR in all copies of the script!',
     ' ***********************************************************************/',
     ''
@@ -33,9 +37,9 @@ var CODE_PATH_DIST = './dist';
 
 gulp.task('build:angularDraggableToggle', function () {
     runSequence('clean:angularDraggableToggle', [
-		'js:angularDraggableToggle', 
-		'css:angularDraggableToggle'
-	]);
+        'js:angularDraggableToggle',
+        'css:angularDraggableToggle'
+    ]);
 });
 
 gulp.task('clean:angularDraggableToggle', function () {

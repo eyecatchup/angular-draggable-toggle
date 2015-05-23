@@ -1,16 +1,18 @@
 # [WIP] angular-draggable-toggle
 
-A lightweight Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - where the handle / knob is clickable AND draggable.
+A lightweight Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - where the handle / knob is clickable, draggable and configurable in many ways.
 
-## Demo
+## Demos
 [eyecatchup.github.io/angular-draggable-toggle/demo.html](http://eyecatchup.github.io/angular-draggable-toggle/demo.html)
+[eyecatchup.github.io/angular-draggable-toggle/demo-touch.html](http://eyecatchup.github.io/angular-draggable-toggle/demo-touch.html)
 
 ## Installation
 
-Download [angular-draggable-toggle.min.js](https://raw.github.com/eyecatchup/angular-draggable-toggle/master/dist/angular-draggable-toggle.min.js) or install with bower.
+Clone the project and install with npm as follows:
 
 ```bash
-$ bower install eyecatchup/angular-draggable-toggle --save
+$ git clone https://github.com/eyecatchup/angular-draggable-toggle.git
+$ npm install
 ```
 
 ## License

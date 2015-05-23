@@ -1,5 +1,5 @@
 /**
-AngularJS Draggable Toggles v0.0.1
+AngularJS Draggable Toggle Buttons v0.0.2
 Copyright 2015 Stephan Schmitz - MIT License
 --------------------------------------------
 Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-toggles/).
@@ -17,7 +17,7 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         return;
       }
 
-      var dataAttr = [ 'on', 'drag', 'click', 'width', 'height', 'animate', 'easing', 'type', 'checkbox', 'handleWidth' ];
+      var dataAttr = [ 'on', 'drag', 'click', 'width', 'height', 'animate', 'type', 'checkbox', 'handleWidth' ];
       var dataOpts = {};
       for (var i = 0; i < dataAttr.length; i++) {
         var opt = el.data('toggle-' + dataAttr[i]);
@@ -39,8 +39,6 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         'on': false,
         // animation time (ms)
         'animate': 250,
-         // animation transition,
-        'easing': 'swing',
         // the checkbox to toggle (for use in forms)
         'checkbox': null,
         // element that can be clicked on to toggle. removes binding from the toggle itself (use nesting)
@@ -54,7 +52,9 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         // defaults to a compact toggle, other option is 'select' where both options are shown at once
         'type': 'compact',
         // the event name to fire when we toggle
-        'event': 'toggle'
+        'event': 'toggle',
+        // the event name to fire when we toggle
+        'touch': false
       }, opts || {}, dataOpts);
 
       self.el = el;
@@ -71,6 +71,12 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
       // leave as undefined if not set
       if (opts['handleWidth']) self.handleWidth = $(opts['handleWidth']);
+
+      self.mouseDown = !opts['touch'] ? 'mousedown' : 'mousedown touchstart';
+      self.mouseMove = !opts['touch'] ? 'mousemove' : 'mousemove touchmove';
+      self.mouseLeave = !opts['touch'] ? 'mouseleave' : 'mouseleave touchend';
+      self.mouseUp = !opts['touch'] ? 'mouseup' : 'mouseup touchend';
+      self.click = !opts['touch'] ? 'click' : 'click touchstart';
 
       self.createEl();
       self.bindEvents();
@@ -182,12 +188,12 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
       // if click is enabled and toggle isn't within the clicker element (stops double binding)
       if (self.opts['click'] && (!self.opts['clicker'] || !self.opts['clicker'].has(self.el).length)) {
-        self.el.on('click', clickHandler);
+        self.el.on(self.click, clickHandler);
       }
 
       // setup the clicker element
       if (self.opts['clicker']) {
-        self.opts['clicker'].on('click', clickHandler);
+        self.opts['clicker'].on(self.click, clickHandler);
       }
 
       // bind up dragging stuff
@@ -203,9 +209,9 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
       // fired on mouseup and mouseleave events
       var upLeave = function(e) {
-        self.el.off('mousemove');
-        self.els.slide.off('mouseleave');
-        self.els.handle.off('mouseup');
+        self.el.off(self.mouseMove);
+        self.els.slide.off(self.mouseLeave);
+        self.els.handle.off(self.mouseUp);
 
         if (!diff && self.opts['click'] && e.type !== 'mouseleave') {
           self.toggle();
@@ -226,17 +232,26 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
       var wh = -self.w + self.handleWidth;
 
-      self.els.handle.on('mousedown', function(e) {
+      self.els.handle.on(self.mouseDown, function(e) {
 
         // reset diff
         diff = 0;
 
-        self.els.handle.off('mouseup');
-        self.els.slide.off('mouseleave');
+        self.els.handle.off(self.mouseUp);
+        self.els.slide.off(self.mouseLeave);
         var cursor = e.pageX;
+        if (cursor === undefined && self.opts['touch'] === true) {
+          cursor = e.originalEvent.touches[0].pageX;
+          //cursor = e.changedTouches[0].pageX;
+        }
 
-        self.el.on('mousemove', self.els.handle, function(e) {
-          diff = e.pageX - cursor;
+        self.el.on(self.mouseMove, self.els.handle, function(e) {
+          var currentCursor = e.pageX;
+          if (currentCursor === undefined && self.opts['touch'] === true) {
+            currentCursor = e.originalEvent.touches[0].pageX;
+            //currentCursor = e.changedTouches[0].pageX;
+          }
+          diff = currentCursor - cursor;
           var marginLeft;
 
           if (self['active']) {
@@ -255,11 +270,12 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
           }
 
-          self.els.inner.css('margin-left',marginLeft);
+          self.els.inner.css('margin-left', marginLeft);
         });
 
-        self.els.handle.on('mouseup', upLeave);
-        self.els.slide.on('mouseleave', upLeave);
+        self.els.handle.on(self.mouseUp, upLeave);
+        self.els.slide.on(self.mouseLeave, upLeave);
+        //self.els.slide.on('mouseleave', upLeave);
       });
     };
 
