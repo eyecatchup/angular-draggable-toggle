@@ -76,7 +76,6 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
       self.mouseMove = !opts['touch'] ? 'mousemove' : 'mousemove touchmove';
       self.mouseLeave = !opts['touch'] ? 'mouseleave' : 'mouseleave touchend';
       self.mouseUp = !opts['touch'] ? 'mouseup' : 'mouseup touchend';
-      self.click = !opts['touch'] ? 'click' : 'click touchstart';
 
       self.createEl();
       self.bindEvents();
@@ -188,12 +187,12 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
       // if click is enabled and toggle isn't within the clicker element (stops double binding)
       if (self.opts['click'] && (!self.opts['clicker'] || !self.opts['clicker'].has(self.el).length)) {
-        self.el.on(self.click, clickHandler);
+        self.el.on('click', clickHandler);
       }
 
       // setup the clicker element
       if (self.opts['clicker']) {
-        self.opts['clicker'].on(self.click, clickHandler);
+        self.opts['clicker'].on('click', clickHandler);
       }
 
       // bind up dragging stuff
