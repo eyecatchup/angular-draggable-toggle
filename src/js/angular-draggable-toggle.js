@@ -224,8 +224,8 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         } else {
           // reset to previous state
           self.els.inner.stop().animate({
-			marginLeft: (self.selectType || self['active']) ? 0 : 
-			  -self.sliderInnerWidth + self.handleWidth
+            marginLeft: (self.selectType || self['active']) ? 0 :
+              -self.sliderInnerWidth + self.handleWidth
           }, self.opts['animate'] / 2);
         }
       };
