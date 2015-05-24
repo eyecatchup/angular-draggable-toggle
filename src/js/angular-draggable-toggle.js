@@ -1,5 +1,5 @@
 /**
-AngularJS Draggable Toggle Buttons v0.0.2
+AngularJS Draggable Toggle Buttons v0.0.5
 Copyright 2015 Stephan Schmitz - MIT License
 --------------------------------------------
 Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-toggles/).
@@ -161,7 +161,7 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         marginLeft: (isSelect || self['active']) ? 0 : -width + handleWidth
       });
 
-      if (self.selectType) {
+      if (isSelect) {
         self.els.slide.addClass('toggle-select');
         self.el.css('width', onOffWidth * 2);
         self.els.handle.hide();
@@ -224,7 +224,8 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         } else {
           // reset to previous state
           self.els.inner.stop().animate({
-            marginLeft: self['active'] ? 0 : -self.sliderInnerWidth
+			marginLeft: (self.selectType || self['active']) ? 0 : 
+			  -self.sliderInnerWidth + self.handleWidth
           }, self.opts['animate'] / 2);
         }
       };
