@@ -1,6 +1,6 @@
 {
   "name": "angular-draggable-toggle",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - where the handle / knob is clickable AND draggable.", 
   "authors": [
     { 

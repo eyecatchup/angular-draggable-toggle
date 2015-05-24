@@ -77,19 +77,19 @@ This code may only be used under the MIT license found at <http://eyecatchup.mit
 
       <!-- Example 2 -->
 
-      <h3 name="example-1">Ex. #2: Draggable handle &amp; clickable labels /w touch support + custom handle width &amp; element height*</h3>
+      <h3 name="example-1">Ex. #2: Draggable handle &amp; clickable labels + custom handle width &amp; element height*</h3>
 
       <h5 name="source-1">Source:</h5>
 
       <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.1 }}&lt;/p&gt;
-&lt;div ng-model="toggleState.1" draggable-toggle="{touch: true, handleWidth: 120, height: 30}"&gt;&lt;/div&gt;</code></pre>
+&lt;div ng-model="toggleState.1" draggable-toggle="{handleWidth: 120, height: 30}"&gt;&lt;/div&gt;</code></pre>
 
       <h5 name="result-1">Result:</h5>
 
       <div class="demo">
         <p><b>Toggle-State</b>: {{ toggleState.1 }}</p>
         <div class="small">
-          <div ng-model="toggleState.1" draggable-toggle="{touch: true, handleWidth: 120, height: 30}"></div>
+          <div ng-model="toggleState.1" draggable-toggle="{handleWidth: 120, height: 30}"></div>
         </div>
       </div>
 
@@ -129,20 +129,20 @@ This code may only be used under the MIT license found at <http://eyecatchup.mit
 
       <!-- Example 4 -->
 
-      <h3 name="example-3">Ex. #4: Draggable handle /w touch support, click handler disabled + custom handle width &amp; animation speed</h3>
+      <h3 name="example-3">Ex. #4: Draggable handle, click handler disabled + custom handle width &amp; animation speed</h3>
 
       <h5 name="source-3">Source:</h5>
 
       <pre><code ng-non-bindable>&lt;p&gt;Toggle-State: {{ toggleState.3 }}&lt;/p&gt;
 &lt;div ng-model="toggleState.3"
-     draggable-toggle="{touch: true, click: false, handleWidth: 250, animation: 400}"&gt;&lt;/div&gt;</code></pre>
+     draggable-toggle="{click: false, handleWidth: 250, animation: 400}"&gt;&lt;/div&gt;</code></pre>
 
       <h5 name="result-3">Result:</h5>
 
       <div class="demo">
         <p><b>Toggle-State</b>: {{ toggleState.3 }}</p>
         <div ng-model="toggleState.3"
-             draggable-toggle="{touch: true, click: false, handleWidth: 250, animation: 400}"></div>
+             draggable-toggle="{click: false, handleWidth: 250, animation: 400}"></div>
       </div>
 
       <hr/>

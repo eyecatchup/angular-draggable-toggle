@@ -54,7 +54,7 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         // the event name to fire when we toggle
         'event': 'toggle',
         // the event name to fire when we toggle
-        'touch': false
+        'touch': true
       }, opts || {}, dataOpts);
 
       self.el = el;
