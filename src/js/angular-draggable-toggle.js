@@ -17,25 +17,39 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         return;
       }
 
-      var dataAttr = [ 'on', 'drag', 'click', 'width', 'height', 'animate', 'type', 'checkbox', 'handleWidth' ];
+      // evaluate user options set via data-toggle-* attributes
+      var dataAttrs = [
+        'on',
+        'drag',
+        'click',
+        'width',
+        'height',
+        'animate',
+        'type',
+        'checkbox',
+        'handleWidth',
+        'minDragToToggle'
+      ];
       var dataOpts = {};
-      for (var i = 0; i < dataAttr.length; i++) {
-        var opt = el.data('toggle-' + dataAttr[i]);
-        if (typeof opt !== 'undefined') dataOpts[dataAttr[i]] = opt;
+      for (var i = 0; i < dataAttrs.length; i++) {
+        var opt = el.data('toggle-' + dataAttrs[i]);
+        if (typeof opt !== 'undefined') dataOpts[dataAttrs[i]] = opt;
       }
 
       // extend default opts with the users options
       opts = self.opts = $.extend({
-        // can the toggle be dragged
+        // can the handle be dragged to toggle?
         'drag': true,
-        // can it be clicked to toggle
+        // can the labels be clicked to toggle?
         'click': true,
+        // should listen for touch events (or, if false, just mouse events)?
+        'touch': true,
+        // text for the ON/OFF labels
         'text': {
-          // text for the ON/OFF position
           'on': 'ON',
           'off': 'OFF'
         },
-        // is the toggle ON on init
+        // is the toggle ON on init?
         'on': false,
         // animation time (ms)
         'animate': 250,
@@ -43,6 +57,8 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         'checkbox': null,
         // element that can be clicked on to toggle. removes binding from the toggle itself (use nesting)
         'clicker': null,
+        // how many percent, at least, of the total width needs to be dragged in order to toggle?
+        'minDragToToggle': 15,
         // handle width used if not set in css
         'handleWidth': 100,
         // width used if not set in css
@@ -51,10 +67,8 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         'height': 50,
         // defaults to a compact toggle, other option is 'select' where both options are shown at once
         'type': 'compact',
-        // the event name to fire when we toggle
-        'event': 'toggle',
-        // the event name to fire when we toggle
-        'touch': true
+        // the event name to fire on toggle
+        'event': 'toggle'
       }, opts || {}, dataOpts);
 
       self.el = el;
@@ -116,11 +130,11 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         // inside slide, this bit moves
         inner: div('inner'),
 
-        // the on/off divs
+        // the on/off divs (a.k.a. labels)
         on: div('on'),
         off: div('off'),
 
-        // the grip to drag the toggle
+        // the handle / knob to drag the toggle
         handle: div('handle')
       };
 
@@ -176,7 +190,7 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
     Toggles.prototype.bindEvents = function() {
       var self = this;
 
-      // evt handler for click events
+      // event handler for click events
       var clickHandler = function(e) {
 
         // if the target isn't the handle or dragging is disabled, toggle!
@@ -202,11 +216,11 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
     Toggles.prototype.bindDrag = function() {
       var self = this;
 
-      // time to begin the dragging parts/handle clicks
+      // time to begin the dragging parts / handle clicks
       var diff;
-      var slideLimit = self.onOffWidth / 3;
+      var slideLimit = self.onOffWidth / 100 * self.opts['minDragToToggle'];
 
-      // fired on mouseup and mouseleave events
+      // fired on touchend, mouseup and mouseleave events
       var upLeave = function(e) {
         self.el.off(self.mouseMove);
         self.els.slide.off(self.mouseLeave);
@@ -241,17 +255,18 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
         self.els.slide.off(self.mouseLeave);
         var cursor = e.pageX;
         if (cursor === undefined && self.opts['touch'] === true) {
-          cursor = e.originalEvent.touches[0].pageX;
-          //cursor = e.changedTouches[0].pageX;
+          cursor = e.originalEvent.changedTouches.length ?
+            e.originalEvent.changedTouches[0].pageX : e.originalEvent.touches[0].pageX;
         }
 
         self.el.on(self.mouseMove, self.els.handle, function(e) {
           var currentCursor = e.pageX;
           if (currentCursor === undefined && self.opts['touch'] === true) {
-            currentCursor = e.originalEvent.touches[0].pageX;
-            //currentCursor = e.changedTouches[0].pageX;
+            currentCursor = e.originalEvent.changedTouches.length ?
+              e.originalEvent.changedTouches[0].pageX : e.originalEvent.touches[0].pageX;
           }
           diff = currentCursor - cursor;
+
           var marginLeft;
 
           if (self['active']) {
@@ -275,7 +290,6 @@ Based on copyrighted work by Simon Tabor (https://github.com/simontabor/jquery-t
 
         self.els.handle.on(self.mouseUp, upLeave);
         self.els.slide.on(self.mouseLeave, upLeave);
-        //self.els.slide.on('mouseleave', upLeave);
       });
     };
 
