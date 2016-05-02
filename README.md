@@ -1,8 +1,8 @@
-# [WIP] Angular Draggable Toggles
+# Angular Draggable Toggles
 
-> _Leightweight, configurable as hell & supports dragging across devices._
+> _Leightweight, easily configurable & supports dragging across devices._
 
-An Angular-wrapped jQuery plugin that creates easily-styleable toggle buttons - with dozens of options to configure and customize.
+An AngularJS-wrapped jQuery plugin that creates easily-styleable toggle buttons - with dozens of options to configure and customize.
 
 ## Demos
 - **That's the one you want:**<br>[Advanced demo of the Angular wrapper-directive for the jQuery-Plugin, /w data-binding, touch support & more (demo-angular.html)](http://goo.gl/9QuYKm)  
